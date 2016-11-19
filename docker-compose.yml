@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+   stanbol:
+     image: mxr576/stanbol
+     restart: always
+     ports:
+        - "8070:8080"
+
+   stanbol-nodejs:
+     build: .
+     depends_on:
+        - stanbol
+     ports:
+       - "8050:8050"
+     restart: always
+     environment:
+       STANBOL_HOST: stanbol:8080
+       SOCKET_PORT: 8050
