@@ -12,8 +12,8 @@ services:
      depends_on:
         - stanbol
      ports:
-       - "8050:8050"
+       - "8071:8071"
      restart: always
      environment:
        STANBOL_URL: "http://stanbol:8080/enhancer/chain/dbpedia-fst-linking"
-       SOCKET_PORT: 8050
+       SOCKET_PORT: 8071
