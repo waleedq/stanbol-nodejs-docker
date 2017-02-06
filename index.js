@@ -1,5 +1,14 @@
 var request = require('request');
-var io = require('socket.io')(process.env.SOCKET_PORT);
+var https = require('https'), 
+var io = require('socket.io');
+
+if(!process.env.https){
+  io = io.listen(process.env.SOCKET_PORT);
+}else{
+  var app = https.createServer();
+  io = io.listen(app);
+  app.listen(process.env.SOCKET_PORT);
+}
 
 var proccessData = function(data){
   var tags = {}
