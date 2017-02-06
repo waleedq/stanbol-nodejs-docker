@@ -1,11 +1,23 @@
 var request = require('request');
-var https = require('https'), 
+var https = require('https');
+var fs = require('fs');
 var io = require('socket.io');
 
-if(!process.env.https){
+if(!process.env.HTTPS){
   io = io.listen(process.env.SOCKET_PORT);
 }else{
-  var app = https.createServer();
+  var pkey = fs.readFileSync('key.pem');
+  var pcert = fs.readFileSync('cert.pem');
+
+  var options = {
+    key: pkey,
+    cert: pcert
+  };
+
+  var app = https.createServer(options, function(req, res){
+    res.writeHead(200);
+    res.end("welcome to vardot!\n");
+  });
   io = io.listen(app);
   app.listen(process.env.SOCKET_PORT);
 }

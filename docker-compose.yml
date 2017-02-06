@@ -17,3 +17,4 @@ services:
      environment:
        STANBOL_URL: "http://stanbol:8080/enhancer/chain/dbpedia-fst-linking"
        SOCKET_PORT: 8071
+       HTTPS: "true"
